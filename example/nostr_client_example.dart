@@ -1,6 +1,9 @@
 import 'package:nostr_client/nostr_client.dart';
 
 void main() {
-  var awesome = Awesome();
-  print('awesome: ${awesome.isAwesome}');
+  final relay = Relay(
+    url: Uri.parse('wss://nostr-relay.untethr.me'),
+  );
+
+  relay.connect();
 }
