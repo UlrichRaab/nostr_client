@@ -9,6 +9,8 @@ environment:
 dependencies:
   # https://pub.dev/packages/collection
   collection: ^1.17.0
+  # https://pub.dev/packages/json_annotation
+  json_annotation: ^4.7.0
   # https://pub.dev/packages/meta
   meta: ^1.8.0
   # https://pub.dev/packages/path
@@ -17,6 +19,10 @@ dependencies:
   web_socket_channel: ^2.2.0
 
 dev_dependencies:
+  # https://pub.dev/packages/build_runner
+  build_runner: ^2.3.2
+  # https://pub.dev/packages/json_serializable
+  json_serializable: ^6.5.3
   # https://pub.dev/packages/lints
   lints: ^2.0.0
   # https://pub.dev/packages/test
