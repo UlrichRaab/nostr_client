@@ -9,10 +9,14 @@ environment:
 dependencies:
   # https://pub.dev/packages/collection
   collection: ^1.17.0
+  # https://pub.dev/packages/convert
+  convert: ^3.1.1
   # https://pub.dev/packages/json_annotation
   json_annotation: ^4.7.0
   # https://pub.dev/packages/meta
   meta: ^1.8.0
+  # https://pub.dev/packages/pointycastle
+  pointycastle: ^3.6.2
   # https://pub.dev/packages/rxdart
   rxdart: ^0.27.5
   # https://pub.dev/packages/uuid
