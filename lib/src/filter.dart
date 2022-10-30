@@ -1,6 +1,15 @@
+import 'dart:convert';
+
 import 'package:collection/collection.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:meta/meta.dart';
+
+part 'filter.g.dart';
 
 /// A filter determines what events will be sent in a subscription.
+@sealed
+@immutable
+@JsonSerializable()
 class Filter {
   const Filter({
     this.ids,
@@ -13,6 +22,15 @@ class Filter {
     this.limit,
   });
 
+  factory Filter.fromJson(Map<String, dynamic> json) {
+    return _$FilterFromJson(json);
+  }
+
+  factory Filter.fromJsonString(String jsonString) {
+    final json = jsonDecode(jsonString);
+    return Filter.fromJson(json);
+  }
+
   /// A list of event ids or prefixes.
   final List<String>? ids;
 
@@ -24,19 +42,34 @@ class Filter {
   final List<int>? kinds;
 
   /// A list of event ids that are referenced in an **e** tag.
+  @JsonKey(name: '#e')
   final List<String>? e;
 
   /// A list of pubkeys that are referenced in a **p** tag.
+  @JsonKey(name: '#p')
   final List<String>? p;
 
   /// A timestamp, events must be newer than this to pass.
+  @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
   final DateTime? since;
 
   /// A timestamp, events must be older than this to pass.
+  @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
   final DateTime? until;
 
   /// Maximum number of events to be returned in the initial query.
   final int? limit;
+
+  /// Converts this filter to json.
+  Map<String, dynamic> toJson() {
+    return _$FilterToJson(this);
+  }
+
+  /// Converts this filter to a json string.
+  String toJsonString() {
+    final json = toJson();
+    return jsonEncode(json);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -65,4 +98,16 @@ class Filter {
       limit,
     );
   }
+}
+
+// Internal
+
+DateTime? _dateTimeFromJson(int? json) {
+  if (json == null) return null;
+  return DateTime.fromMillisecondsSinceEpoch(json * 1000);
+}
+
+int? _dateTimeToJson(DateTime? dateTime) {
+  if (dateTime == null) return null;
+  return dateTime.millisecondsSinceEpoch ~/ 1000;
 }
