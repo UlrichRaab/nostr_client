@@ -12,7 +12,7 @@ void main() {
   });
 
   test(
-    'subscribe',
+    'req',
     () async {
       final filter = Filter(
         kinds: [1],
@@ -20,9 +20,9 @@ void main() {
       );
 
       for (int i = 0; i < 1; i++) {
-        final subscriptionId = relay.subscribe(filter);
+        final subscriptionId = relay.req(filter);
         await Future.delayed(Duration(seconds: 5));
-        return relay.unsubscribe(subscriptionId);
+        return relay.close(subscriptionId);
       }
     },
   );
