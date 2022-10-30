@@ -1,7 +1,13 @@
+import 'dart:convert';
+
+import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
+
+part 'event.g.dart';
 
 @sealed
 @immutable
+@JsonSerializable()
 class Event {
   const Event({
     required this.id,
@@ -13,14 +19,24 @@ class Event {
     required this.sig,
   });
 
+  factory Event.fromJson(Map<String, dynamic> json) {
+    return _$EventFromJson(json);
+  }
+
+  factory Event.fromJsonString(String jsonString) {
+    final json = jsonDecode(jsonString);
+    return Event.fromJson(json);
+  }
+
   /// 32-bytes sha256 of the the serialized event data.
   final String id;
 
   /// 32-bytes hex-encoded public key of the event creator.
   final String pubkey;
 
-  /// Unix timestamp in seconds.
-  final int createdAt;
+  /// The creation timestamp of the event.
+  @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
+  final DateTime createdAt;
 
   /// The kind of event.
   final int kind;
@@ -35,6 +51,18 @@ class Event {
   /// is the same as the **id** field.
   final String sig;
 
+  /// Converts this event to json.
+  Map<String, dynamic> toJson() {
+    return _$EventToJson(this);
+  }
+
+  /// Converts this event to a json string.
+  String toJsonString({bool pretty = false}) {
+    final json = toJson();
+    final encoder = pretty ? JsonEncoder.withIndent(' ' * 4) : JsonEncoder();
+    return encoder.convert(json);
+  }
+
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
@@ -48,7 +76,17 @@ class Event {
 
   @override
   String toString() {
-    final sb = StringBuffer()..write('Event');
-    return sb.toString();
+    final jsonString = toJsonString(pretty: true);
+    return 'Event $jsonString';
   }
+}
+
+// Internal
+
+DateTime _dateTimeFromJson(int json) {
+  return DateTime.fromMillisecondsSinceEpoch(json * 1000);
+}
+
+int _dateTimeToJson(DateTime dateTime) {
+  return dateTime.millisecondsSinceEpoch ~/ 1000;
 }
