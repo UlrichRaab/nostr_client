@@ -66,9 +66,10 @@ class Filter {
   }
 
   /// Converts this filter to a json string.
-  String toJsonString() {
+  String toJsonString({bool pretty = false}) {
     final json = toJson();
-    return jsonEncode(json);
+    final encoder = pretty ? JsonEncoder.withIndent(' ' * 2) : JsonEncoder();
+    return encoder.convert(json);
   }
 
   @override
@@ -97,6 +98,12 @@ class Filter {
       until,
       limit,
     );
+  }
+
+  @override
+  String toString() {
+    final jsonString = toJsonString(pretty: true);
+    return 'Filter $jsonString';
   }
 }
 
