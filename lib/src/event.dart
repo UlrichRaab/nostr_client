@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:collection/collection.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
@@ -59,19 +60,34 @@ class Event {
   /// Converts this event to a json string.
   String toJsonString({bool pretty = false}) {
     final json = toJson();
-    final encoder = pretty ? JsonEncoder.withIndent(' ' * 4) : JsonEncoder();
+    final encoder = pretty ? JsonEncoder.withIndent(' ' * 2) : JsonEncoder();
     return encoder.convert(json);
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Event && other.id == id;
+    return other is Event &&
+        other.id == id &&
+        other.pubkey == pubkey &&
+        other.createdAt == createdAt &&
+        other.kind == kind &&
+        ListEquality(ListEquality()).equals(other.tags, tags) &&
+        other.content == content &&
+        other.sig == sig;
   }
 
   @override
   int get hashCode {
-    return id.hashCode;
+    return Object.hash(
+      id,
+      pubkey,
+      createdAt,
+      kind,
+      Object.hashAll(tags.map((e) => Object.hashAll(e))),
+      content,
+      sig,
+    );
   }
 
   @override
