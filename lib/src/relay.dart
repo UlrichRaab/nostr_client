@@ -1,22 +1,34 @@
 import 'dart:convert';
 
+import 'package:http/http.dart' as http;
 import 'package:nostr_client/nostr_client.dart';
 import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/io.dart';
 
 class Relay {
   const Relay._(
+    this._url,
     this._channel,
     this._subscriptionIds,
   );
 
   factory Relay.connect(String url) {
     final channel = IOWebSocketChannel.connect(url);
-    return Relay._(channel, {});
+    return Relay._(url, channel, {});
   }
 
+  final String _url;
   final IOWebSocketChannel _channel;
   final Set<String> _subscriptionIds;
+
+  Future<RelayInformationDocument> get informationDocument async {
+    final url = Uri.parse(_url).replace(scheme: 'https');
+    final response = await http.get(
+      url,
+      headers: {'Accept': 'application/nostr+json'},
+    );
+    return RelayInformationDocument.fromJsonString(response.body);
+  }
 
   Stream<Message> get stream {
     return _channel.stream.map((data) => jsonDecode(data) as Message);
