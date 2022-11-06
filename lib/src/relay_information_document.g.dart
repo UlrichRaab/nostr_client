@@ -9,7 +9,6 @@ part of 'relay_information_document.dart';
 RelayInformationDocument _$RelayInformationDocumentFromJson(
         Map<String, dynamic> json) =>
     RelayInformationDocument(
-      id: json['id'] as String?,
       name: json['name'] as String,
       description: json['description'] as String,
       pubkey: json['pubkey'] as String,
@@ -31,7 +30,6 @@ Map<String, dynamic> _$RelayInformationDocumentToJson(
     }
   }
 
-  writeNotNull('id', instance.id);
   val['name'] = instance.name;
   val['description'] = instance.description;
   val['pubkey'] = instance.pubkey;

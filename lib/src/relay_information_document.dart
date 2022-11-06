@@ -6,20 +6,20 @@ import 'package:meta/meta.dart';
 
 part 'relay_information_document.g.dart';
 
-/// A filter determines what events will be sent in a subscription.
+/// A document which contains server metadata of a relay. This includes
+/// capabilities, administrative contacts, and various other server attributes.
 @sealed
 @immutable
 @JsonSerializable()
 class RelayInformationDocument {
   const RelayInformationDocument({
-    this.id,
-    required this.name,
-    required this.description,
-    required this.pubkey,
+    this.name,
+    this.description,
+    this.pubkey,
     this.contact,
-    required this.supportedNips,
-    required this.software,
-    required this.version,
+    this.supportedNips,
+    this.software,
+    this.version,
   });
 
   factory RelayInformationDocument.fromJson(Map<String, dynamic> json) {
@@ -31,14 +31,26 @@ class RelayInformationDocument {
     return RelayInformationDocument.fromJson(json);
   }
 
-  final String? id;
-  final String name;
-  final String description;
-  final String pubkey;
+  /// The display name of the relay.
+  final String? name;
+
+  /// Detailed plain-text information about the relay.
+  final String? description;
+
+  /// The public key of the administrative contact.
+  final String? pubkey;
+
+  /// The administrative alternate contact.
   final String? contact;
-  final List<int> supportedNips;
-  final String software;
-  final String version;
+
+  /// The list of NIP numbers supported by the relay.
+  final List<int>? supportedNips;
+
+  /// A string identifying the relay software URL.
+  final String? software;
+
+  /// The version of the software.
+  final String? version;
 
   /// Converts this relay information document to json.
   Map<String, dynamic> toJson() {
@@ -56,7 +68,6 @@ class RelayInformationDocument {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is RelayInformationDocument &&
-        other.id == id &&
         other.name == name &&
         other.description == description &&
         other.pubkey == pubkey &&
@@ -69,12 +80,11 @@ class RelayInformationDocument {
   @override
   int get hashCode {
     return Object.hash(
-      id,
       name,
       description,
       pubkey,
       contact,
-      Object.hashAll(supportedNips),
+      Object.hashAll(supportedNips ?? []),
       software,
       version,
     );
