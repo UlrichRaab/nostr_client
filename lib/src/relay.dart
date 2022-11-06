@@ -21,6 +21,7 @@ class Relay {
   final IOWebSocketChannel _channel;
   final Set<String> _subscriptionIds;
 
+  /// The relay information document of the relay.
   Future<RelayInformationDocument> get informationDocument async {
     final url = Uri.parse(_url).replace(scheme: 'https');
     final response = await http.get(
@@ -30,6 +31,7 @@ class Relay {
     return RelayInformationDocument.fromJsonString(response.body);
   }
 
+  /// A stream which emits all messages sent by the relay.
   Stream<Message> get stream {
     return _channel.stream.map((data) => jsonDecode(data) as Message);
   }
