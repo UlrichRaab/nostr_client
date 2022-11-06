@@ -9,15 +9,15 @@ part of 'relay_information_document.dart';
 RelayInformationDocument _$RelayInformationDocumentFromJson(
         Map<String, dynamic> json) =>
     RelayInformationDocument(
-      name: json['name'] as String,
-      description: json['description'] as String,
-      pubkey: json['pubkey'] as String,
+      name: json['name'] as String?,
+      description: json['description'] as String?,
+      pubkey: json['pubkey'] as String?,
       contact: json['contact'] as String?,
-      supportedNips: (json['supported_nips'] as List<dynamic>)
-          .map((e) => e as int)
+      supportedNips: (json['supported_nips'] as List<dynamic>?)
+          ?.map((e) => e as int)
           .toList(),
-      software: json['software'] as String,
-      version: json['version'] as String,
+      software: json['software'] as String?,
+      version: json['version'] as String?,
     );
 
 Map<String, dynamic> _$RelayInformationDocumentToJson(
@@ -30,12 +30,12 @@ Map<String, dynamic> _$RelayInformationDocumentToJson(
     }
   }
 
-  val['name'] = instance.name;
-  val['description'] = instance.description;
-  val['pubkey'] = instance.pubkey;
+  writeNotNull('name', instance.name);
+  writeNotNull('description', instance.description);
+  writeNotNull('pubkey', instance.pubkey);
   writeNotNull('contact', instance.contact);
-  val['supported_nips'] = instance.supportedNips;
-  val['software'] = instance.software;
-  val['version'] = instance.version;
+  writeNotNull('supported_nips', instance.supportedNips);
+  writeNotNull('software', instance.software);
+  writeNotNull('version', instance.version);
   return val;
 }
