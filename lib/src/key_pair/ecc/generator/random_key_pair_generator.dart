@@ -2,14 +2,15 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:nostr_client/nostr_client.dart';
-import 'package:nostr_client/src/crypto/ecc/ec_key_pair.dart';
+import 'package:nostr_client/src/key_pair/ecc/ec_key_pair.dart';
 import 'package:pointycastle/export.dart';
 
-class ECKeyPairGenerator implements KeyPairGenerator {
-  const ECKeyPairGenerator();
+/// A key pair generator that generates random key pairs.
+class RandomKeyPairGenerator implements KeyPairGenerator<dynamic> {
+  const RandomKeyPairGenerator();
 
   @override
-  KeyPair generate() {
+  KeyPair generate({dynamic params}) {
     final domainParams = ECCurve_secp256k1();
     final keyGeneratorParams = ECKeyGeneratorParameters(domainParams);
     final random = _createSecureRandom();
@@ -17,7 +18,10 @@ class ECKeyPairGenerator implements KeyPairGenerator {
     final generator = ECKeyGenerator();
     generator.init(cipherParams);
     final ecKeyPair = generator.generateKeyPair() as ECKeyPair;
-    return ecKeyPair.toKeyPair();
+    return KeyPair(
+      publicKey: ecKeyPair.publicKey.toString(),
+      privateKey: ecKeyPair.privateKey.toString(),
+    );
   }
 
   SecureRandom _createSecureRandom() {
