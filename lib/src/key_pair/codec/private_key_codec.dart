@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:pointycastle/export.dart';
 
-class ECPrivateKeyCodec extends Codec<ECPrivateKey, String> {
-  const ECPrivateKeyCodec();
+class PrivateKeyCodec extends Codec<ECPrivateKey, String> {
+  const PrivateKeyCodec();
 
   @override
   Converter<String, ECPrivateKey> get decoder => _Decoder();

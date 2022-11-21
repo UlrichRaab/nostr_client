@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:pointycastle/export.dart';
 
-class ECPublicKeyCodec extends Codec<ECPublicKey, String> {
-  const ECPublicKeyCodec();
+/// https://bips.xyz/340
+class PublicKeyCodec extends Codec<ECPublicKey, String> {
+  const PublicKeyCodec();
 
   @override
   Converter<String, ECPublicKey> get decoder => _Decoder();
@@ -19,7 +20,11 @@ class _Decoder extends Converter<String, ECPublicKey> {
 
   @override
   ECPublicKey convert(String input) {
-    throw UnimplementedError();
+    final parameters = ECCurve_secp256k1();
+    final curve = parameters.curve;
+    final x = BigInt.parse(input, radix: 16);
+    final q = curve.decompressPoint(0x02, x);
+    return ECPublicKey(q, parameters);
   }
 }
 
@@ -29,8 +34,7 @@ class _Encoder extends Converter<ECPublicKey, String> {
   @override
   String convert(ECPublicKey input) {
     final q = input.Q!;
-    q.getEncoded();
     final x = q.x!;
-    return x.toBigInteger()!.toRadixString(16);
+    return x.toBigInteger()!.toRadixString(16).padLeft(64, '0');
   }
 }

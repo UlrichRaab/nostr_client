@@ -2,7 +2,8 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:nostr_client/nostr_client.dart';
-import 'package:nostr_client/src/key_pair/ecc/ec_key_pair.dart';
+import 'package:nostr_client/src/key_pair/codec/private_key_codec.dart';
+import 'package:nostr_client/src/key_pair/codec/public_key_codec.dart';
 import 'package:pointycastle/export.dart';
 
 /// A key pair generator that generates random key pairs.
@@ -17,10 +18,12 @@ class RandomKeyPairGenerator implements KeyPairGenerator<dynamic> {
     final cipherParams = ParametersWithRandom(keyGeneratorParams, random);
     final generator = ECKeyGenerator();
     generator.init(cipherParams);
-    final ecKeyPair = generator.generateKeyPair() as ECKeyPair;
+    final ecKeyPair = generator.generateKeyPair();
+    final ecPublicKey = ecKeyPair.publicKey as ECPublicKey;
+    final ecPrivateKey = ecKeyPair.privateKey as ECPrivateKey;
     return KeyPair(
-      publicKey: ecKeyPair.publicKey.toString(),
-      privateKey: ecKeyPair.privateKey.toString(),
+      publicKey: PublicKeyCodec().encode(ecPublicKey),
+      privateKey: PrivateKeyCodec().encode(ecPrivateKey),
     );
   }
 

@@ -1,14 +1,14 @@
 import 'package:nostr_client/nostr_client.dart';
 import 'package:test/test.dart';
 
+final pubkeys = <String>{};
+
 void main() {
   late final Relay relay;
 
   setUp(() {
     relay = Relay.connect('wss://relay.nostr.info');
-    relay.stream.listen((message) {
-      print(message);
-    });
+    relay.stream.listen(printMessage);
   });
 
   test(
@@ -26,4 +26,25 @@ void main() {
       }
     },
   );
+
+  tearDown(() {
+    for (String pubkey in pubkeys) {
+      print("'$pubkey'");
+    }
+  });
+}
+
+printMessage(List<dynamic> message) {
+  final type = message.first;
+  if (type == 'EVENT') {
+    final json = message[2];
+    printEvent(json);
+  } else {
+    print('Message(type: $type)');
+  }
+}
+
+printEvent(Map<String, dynamic> json) {
+  final event = Event.fromJson(json);
+  pubkeys.add(event.pubkey);
 }
