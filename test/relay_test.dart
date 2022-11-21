@@ -5,17 +5,33 @@ void main() {
   final relayUrl = 'wss://relay.nostr.info';
 
   test(
-    'req kind 0 events (user metadata)',
+    'req kind 0 events (metadata)',
     () async {
       final relay = Relay.connect(relayUrl);
-      relay.stream.whereIsEvent().whereIsKind(0).listen((event) {
-        final jsonString = event.content;
-        final userMetadata = UserMetadata.fromJsonString(jsonString);
-        final p = userMetadata.toString();
-        print(p);
+      relay.stream.whereIsEvent().listen((event) {
+        print(event);
+        final userMetadata = UserMetadata.fromJsonString(event.content);
+        print(userMetadata);
       });
+      final filter = Filter(
+        kinds: [EventKind.metadata],
+        limit: 10,
+      );
+      final subscriptionId = relay.req(filter);
+      await Future.delayed(Duration(seconds: 5));
+      return relay.close(subscriptionId);
+    },
+  );
 
-      final filter = Filter(kinds: [0]);
+  test(
+    'req kind 1 events (text)',
+    () async {
+      final relay = Relay.connect(relayUrl);
+      relay.stream.whereIsEvent().listen((event) => print(event));
+      final filter = Filter(
+        kinds: [EventKind.text],
+        limit: 10,
+      );
       final subscriptionId = relay.req(filter);
       await Future.delayed(Duration(seconds: 5));
       return relay.close(subscriptionId);
