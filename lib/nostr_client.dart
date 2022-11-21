@@ -1,6 +1,7 @@
 library nostr_client;
 
 export 'package:nostr_client/src/event.dart';
+export 'package:nostr_client/src/event_kind.dart';
 export 'package:nostr_client/src/filter.dart';
 export 'package:nostr_client/src/key_pair/generator/key_pair_generator.dart';
 export 'package:nostr_client/src/key_pair/generator/mnemonic_key_pair_generator.dart';
