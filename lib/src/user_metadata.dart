@@ -15,6 +15,7 @@ class UserMetadata {
     this.name,
     this.about,
     this.picture,
+    this.nip05,
   });
 
   factory UserMetadata.fromJson(Map<String, dynamic> json) {
@@ -39,6 +40,9 @@ class UserMetadata {
 
   /// The URL of the profile pcture of the user.
   final String? picture;
+
+  /// The internet identifier of the user.
+  final String? nip05;
 
   /// Converts this user metadata to json.
   Map<String, dynamic> toJson() {

@@ -11,21 +11,5 @@ UserMetadata _$UserMetadataFromJson(Map<String, dynamic> json) => UserMetadata(
       name: json['name'] as String?,
       about: json['about'] as String?,
       picture: json['picture'] as String?,
+      nip05: json['nip05'] as String?,
     );
-
-Map<String, dynamic> _$UserMetadataToJson(UserMetadata instance) {
-  final val = <String, dynamic>{
-    'raw_data': instance.rawData,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('name', instance.name);
-  writeNotNull('about', instance.about);
-  writeNotNull('picture', instance.picture);
-  return val;
-}
