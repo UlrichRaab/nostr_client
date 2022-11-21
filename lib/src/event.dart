@@ -106,3 +106,13 @@ DateTime _dateTimeFromJson(int json) {
 int _dateTimeToJson(DateTime dateTime) {
   return dateTime.millisecondsSinceEpoch ~/ 1000;
 }
+
+// Extensions
+
+extension EventStreamX on Stream<Event> {
+  /// Creates a new stream from this stream that emits only events where kind
+  /// is equal to [kind] and discards all other events.
+  Stream<Event> whereIsKind(int kind) {
+    return where((event) => event.kind == kind);
+  }
+}
