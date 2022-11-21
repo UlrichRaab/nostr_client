@@ -9,3 +9,5 @@ export 'package:nostr_client/src/key_pair/key_pair.dart';
 export 'package:nostr_client/src/message.dart';
 export 'package:nostr_client/src/relay.dart';
 export 'package:nostr_client/src/relay_information_document.dart';
+export 'package:nostr_client/src/signature/signer.dart';
+export 'package:nostr_client/src/signature/verifier.dart';

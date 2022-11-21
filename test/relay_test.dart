@@ -1,8 +1,6 @@
 import 'package:nostr_client/nostr_client.dart';
 import 'package:test/test.dart';
 
-final pubkeys = <String>{};
-
 void main() {
   late final Relay relay;
 
@@ -26,12 +24,6 @@ void main() {
       }
     },
   );
-
-  tearDown(() {
-    for (String pubkey in pubkeys) {
-      print("'$pubkey'");
-    }
-  });
 }
 
 printMessage(List<dynamic> message) {
@@ -46,5 +38,5 @@ printMessage(List<dynamic> message) {
 
 printEvent(Map<String, dynamic> json) {
   final event = Event.fromJson(json);
-  pubkeys.add(event.pubkey);
+  print(event.toString());
 }

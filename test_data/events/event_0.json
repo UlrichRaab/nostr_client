@@ -1,0 +1,43 @@
+{
+    "id": "aefb2c2a99922003e850ba8c2c08397e24d0caabfce22d1f106886ea4ea87efd",
+    "pubkey": "8c0da4862130283ff9e67d889df264177a508974e2feb96de139804ea66d6168",
+    "created_at": 1668989450,
+    "kind": 1,
+    "tags": [
+      [
+        "p",
+        "9ec7a778167afb1d30c4833de9322da0c08ba71a69e1911d5578d3144bb56437",
+        "wss://nostr-pub.semisol.dev"
+      ],
+      [
+        "p",
+        "3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d",
+        "wss://nostr-relay.untethr.me"
+      ],
+      [
+        "p",
+        "52b4a076bcbbbdc3a1aefa3735816cf74993b1b8db202b01c883c58be7fad8bd",
+        "wss://relay.damus.io"
+      ],
+      [
+        "p",
+        "ee11a5dff40c19a555f41fe42b48f00e618c91225622ae37b6c2bb67b76c4e49",
+        "wss://nostr-pub.semisol.dev"
+      ],
+      [
+        "e",
+        "00a93aea1db988c648bd799116172c8d9c002c8f0b41f595ebc0f9143e08830c",
+        "wss://nostr-pub.wellorder.net",
+        "root"
+      ],
+      [
+        "e",
+        "bbf90f6833c44f2833534fd581aba6b767a7b3878bbe3d33e21f4b702581f6a5",
+        "wss://nostr-pub.semisol.dev",
+        "reply"
+      ]
+    ],
+    "content": "yeah relay ranking is prob necessary. you don't want to let the user choose the relay ranking though?",
+    "sig": "c38169d2fdca406c4aed8debfe0fa63d7a1f670176907aa3edf3b0bc4157b83ce078123a4fdf87560ef9de8aa50ae5e8495af534f4f2e95aeacbc3ce6387549d"
+  }
+  

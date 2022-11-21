@@ -1,0 +1,27 @@
+{
+    "id": "548b01f83d40810955c15dbd17e6ad95d70f5b5af4edbe6b5b0b3fb13702e104",
+    "pubkey": "8c0da4862130283ff9e67d889df264177a508974e2feb96de139804ea66d6168",
+    "created_at": 1668989513,
+    "kind": 1,
+    "tags": [
+      [
+        "p",
+        "79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798",
+        "wss://nostr-relay.wlvs.space"
+      ],
+      [
+        "e",
+        "9fb2a5e1dca5bebe5f18443a509024e5823f7e5003e5d671d2edce8f6847e79e",
+        "wss://nostr-pub.wellorder.net",
+        "root"
+      ],
+      [
+        "e",
+        "a48464fe46f4954d50d0b0f7d039211e8883bd76ea73c46e9331c5dd28d6d059",
+        "wss://nostr-pub.semisol.dev",
+        "reply"
+      ]
+    ],
+    "content": "test reply to test reply",
+    "sig": "7f777994d759ae812e38850d5ceb97c0caea3d2c7247cb1c3ce6abc190c8f9d0430da63e5b854890f3e0a000bad7b3066112e9c27edaf006e338c005e5f3b977"
+  }

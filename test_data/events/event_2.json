@@ -1,0 +1,27 @@
+{
+    "id": "9ae09e51556b7ea2b5ec32686f38ed20870a1ef346595a3b7bc14572e80afc77",
+    "pubkey": "ee11a5dff40c19a555f41fe42b48f00e618c91225622ae37b6c2bb67b76c4e49",
+    "created_at": 1668990115,
+    "kind": 1,
+    "tags": [
+      [
+        "p",
+        "8c0da4862130283ff9e67d889df264177a508974e2feb96de139804ea66d6168",
+        "wss://nostr.semisol.dev"
+      ],
+      [
+        "e",
+        "d702e3ee68fe40e39947bf5ee9a551a112c7ffc8274acee508307cec80230fe8",
+        "wss://relay.nostr.info",
+        "root"
+      ],
+      [
+        "e",
+        "077e78de2af8d57c15fd76b63e9c550a6080d0c18d561fe2b3776e7dfa775beb",
+        "wss://nostr.semisol.dev",
+        "reply"
+      ]
+    ],
+    "content": "I just rewrote the part of my lib that serializes/deserializes tags in a way that is more robust against bad tags, as long as they are still sequences of strings (otherwise the event gets tossed).  Also had an event with a pubkey that wasn't long enough (panicked a deep lib)\n",
+    "sig": "6aeeb13712a92343129e35416f285e47bc46d5e103d4c24cd5d7bbac1c11232e3282cb98f92aaca94fa5b6510d80eeaf1fb64349bfa26570664b1e7700e03591"
+  }
