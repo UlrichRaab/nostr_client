@@ -9,17 +9,15 @@ class Relay {
   const Relay._(
     this._url,
     this._channel,
-    this._subscriptionIds,
   );
 
   factory Relay.connect(String url) {
     final channel = IOWebSocketChannel.connect(url);
-    return Relay._(url, channel, {});
+    return Relay._(url, channel);
   }
 
   final String _url;
   final IOWebSocketChannel _channel;
-  final Set<String> _subscriptionIds;
 
   /// The relay information document of the relay.
   Future<RelayInformationDocument> get informationDocument async {
@@ -36,8 +34,8 @@ class Relay {
     return _channel.stream.map((data) => jsonDecode(data) as Message);
   }
 
-  /// Publish the given [event].
-  void publish(Event event) {
+  /// Send the given [event] to the realy.
+  void send(Event event) {
     final message = ['EVENT', event.toJson()];
     final request = jsonEncode(message);
     _channel.sink.add(request);
@@ -47,12 +45,11 @@ class Relay {
   ///
   /// Returns the id of the subscription.
   String req(Filter filter, {String? subscriptionId}) {
-    final id = subscriptionId ?? Uuid().v4();
-    final message = ['REQ', id, filter.toJson()];
+    final sid = subscriptionId ?? Uuid().v4();
+    final message = ['REQ', sid, filter.toJson()];
     final request = jsonEncode(message);
     _channel.sink.add(request);
-    _subscriptionIds.add(id);
-    return id;
+    return sid;
   }
 
   /// Close the subscription with the given [subscriptionId].
@@ -60,12 +57,14 @@ class Relay {
     final message = ['CLOSE', subscriptionId];
     final messageJson = jsonEncode(message);
     _channel.sink.add(messageJson);
-    _subscriptionIds.remove(subscriptionId);
   }
 
-  void disconnect() {
-    for (var subscriptionId in _subscriptionIds) {
-      close(subscriptionId);
-    }
+  /// Terminates the connection to the relay.
+  ///
+  /// Returns a future which is completed as soon as the connection is
+  /// terminated. If cleaning up can fail, the error may be reported in the
+  /// returned future.
+  Future<void> disconnect() async {
+    await _channel.sink.close();
   }
 }
