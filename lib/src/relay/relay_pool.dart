@@ -1,4 +1,5 @@
 import 'package:nostr_client/nostr_client.dart';
+import 'package:uuid/uuid.dart';
 
 /// A relay pool manages the connection and communication with multiple relays.
 class RelayPool {
@@ -16,15 +17,18 @@ class RelayPool {
   /// relay with that url.
   final Map<String, Relay> _relays;
 
-  List<String> req(Filter filter) {
-    final subscriptionIds = <String>[];
+  /// Subscribe to events that match the given [filter].
+  ///
+  /// Returns the id of the subscriptions.
+  String req(Filter filter, {String? subscriptionId}) {
+    final sid = subscriptionId ?? Uuid().v4();
     for (final relay in _relays.values) {
-      final subscriptionId = relay.req(filter);
-      subscriptionIds.add(subscriptionId);
+      relay.req(filter, subscriptionId: sid);
     }
-    return subscriptionIds;
+    return sid;
   }
 
+  /// Close the subscriptions with the given [subscriptionId].
   void close(String subscriptionId) {
     for (final relay in _relays.values) {
       relay.close(subscriptionId);
