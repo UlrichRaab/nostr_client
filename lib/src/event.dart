@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:collection/collection.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
+import 'package:nostr_client/nostr_client.dart';
 
 part 'event.g.dart';
 
@@ -51,6 +52,13 @@ class Event {
   /// 64-bytes signature of the sha256 hash of the serialized event data, which
   /// is the same as the **id** field.
   final String sig;
+
+  /// Verifies the event.
+  ///
+  /// Returns true if the event is valid, false otherwise.
+  bool verify() {
+    return Verifier().verifyEvent(this);
+  }
 
   /// Converts this event to json.
   Map<String, dynamic> toJson() {
