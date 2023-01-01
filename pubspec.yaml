@@ -24,16 +24,16 @@ dependencies:
   # https://pub.dev/packages/pointycastle
   pointycastle: ^3.6.2
   # https://pub.dev/packages/uuid
-  uuid: ^3.0.6
+  uuid: ^3.0.7
   # https://pub.dev/packages/web_socket_channel
   web_socket_channel: ^2.2.0
 
 dev_dependencies:
   # https://pub.dev/packages/build_runner
-  build_runner: ^2.3.2
+  build_runner: ^2.3.3
   # https://pub.dev/packages/json_serializable
   json_serializable: ^6.5.4
   # https://pub.dev/packages/lints
   lints: ^2.0.1
   # https://pub.dev/packages/test
-  test: ^1.22.0
+  test: ^1.22.1
