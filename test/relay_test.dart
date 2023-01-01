@@ -10,7 +10,7 @@ void main() {
       final relay = Relay.connect(relayUrl);
       relay.stream.whereIsEvent().listen((event) {
         print(event);
-        final userMetadata = UserMetadata.fromJsonString(event.content);
+        final userMetadata = Metadata.fromJsonString(event.content);
         print(userMetadata);
       });
       final filter = Filter(

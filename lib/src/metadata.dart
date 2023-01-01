@@ -4,13 +4,13 @@ import 'package:collection/collection.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
-part 'user_metadata.g.dart';
+part 'metadata.g.dart';
 
 @sealed
 @immutable
 @JsonSerializable(createToJson: false)
-class UserMetadata {
-  const UserMetadata({
+class Metadata {
+  const Metadata({
     required this.rawData,
     this.name,
     this.about,
@@ -18,15 +18,15 @@ class UserMetadata {
     this.nip05,
   });
 
-  factory UserMetadata.fromJson(Map<String, dynamic> json) {
+  factory Metadata.fromJson(Map<String, dynamic> json) {
     final json2 = Map.of(json);
     json2['raw_data'] = json;
-    return _$UserMetadataFromJson(json2);
+    return _$MetadataFromJson(json2);
   }
 
-  factory UserMetadata.fromJsonString(String jsonString) {
+  factory Metadata.fromJsonString(String jsonString) {
     final json = jsonDecode(jsonString);
-    return UserMetadata.fromJson(json);
+    return Metadata.fromJson(json);
   }
 
   /// The raw user metadata as key-value pairs.
@@ -59,8 +59,7 @@ class UserMetadata {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UserMetadata &&
-        MapEquality().equals(other.rawData, rawData);
+    return other is Metadata && MapEquality().equals(other.rawData, rawData);
   }
 
   @override
@@ -72,6 +71,6 @@ class UserMetadata {
   @override
   String toString() {
     final jsonString = toJsonString(pretty: true);
-    return 'UserMetadata $jsonString';
+    return 'Metadata $jsonString';
   }
 }

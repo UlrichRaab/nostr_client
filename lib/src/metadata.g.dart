@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_metadata.dart';
+part of 'metadata.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserMetadata _$UserMetadataFromJson(Map<String, dynamic> json) => UserMetadata(
+Metadata _$MetadataFromJson(Map<String, dynamic> json) => Metadata(
       rawData: json['raw_data'] as Map<String, dynamic>,
       name: json['name'] as String?,
       about: json['about'] as String?,
