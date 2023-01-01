@@ -4,7 +4,7 @@ homepage: https://github.com/UlrichRaab/nostr_client
 version: 0.1.0
 
 environment:
-  sdk: '>=2.18.4 <3.0.0'
+  sdk: '>=2.18.6 <3.0.0'
 
 dependencies:
   # https://pub.dev/packages/bip340
