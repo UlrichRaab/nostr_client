@@ -8,7 +8,7 @@ class RelayPool {
   factory RelayPool({required Set<String> urls}) {
     final relays = <String, Relay>{};
     for (final url in urls) {
-      relays[url] = Relay.connect(url);
+      relays[url] = Relay(url);
     }
     return RelayPool._(relays);
   }
@@ -20,18 +20,18 @@ class RelayPool {
   /// Subscribe to events that match the given [filter].
   ///
   /// Returns the id of the subscriptions.
-  String req(Filter filter, {String? subscriptionId}) {
+  String subscribe(Filter filter, {String? subscriptionId}) {
     final sid = subscriptionId ?? Uuid().v4();
     for (final relay in _relays.values) {
-      relay.req(filter, subscriptionId: sid);
+      relay.subscribe(filter, subscriptionId: sid);
     }
     return sid;
   }
 
-  /// Close the subscriptions with the given [subscriptionId].
-  void close(String subscriptionId) {
+  /// Cancel the subscriptions with the given [subscriptionId].
+  void unsubscribe(String subscriptionId) {
     for (final relay in _relays.values) {
-      relay.close(subscriptionId);
+      relay.unsubscribe(subscriptionId);
     }
   }
 }
