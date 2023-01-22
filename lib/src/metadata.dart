@@ -64,8 +64,8 @@ class Metadata {
 
   @override
   int get hashCode {
-    // TODO Check if this is the correct way to get the hash code of a map.
-    return rawData.hashCode;
+    // This only works if the map does not contain other collections.
+    return MapEquality().hash(rawData);
   }
 
   @override
