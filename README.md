@@ -1,4 +1,4 @@
-# nostr_client 0.1.0
+# nostr_client 0.2.0
 
 A nostr client for dart and flutter.
 
@@ -25,6 +25,41 @@ A nostr client for dart and flutter.
 - [ ] [NIP-25: Reactions][nip25]
 - [ ] [NIP-28: Public Chat][nip28]
 - [ ] [NIP-35: User Discovery][nip35]
+
+## Getting Started
+
+Add this package to the `pubspec.yaml` of your flutter project:
+
+```yaml
+dependencies:
+  nostr_client: ^0.2.0
+```
+
+## Usage
+
+```dart
+import 'package:nostr_client/nostr_client.dart'
+
+// Create a new relay instance and connect to the relay
+final relay = Relay('wss://relay.nostr.info');
+relay.connect();
+
+// Print events sent by the relay
+relay.stream.whereIsEvent().listen(print);
+
+// Request text events from the relay and subscribe to updates
+final filter = Filter(
+  kinds: [EventKind.text],
+  limit: 10,
+);
+final subscriptionId = relay.subscribe(filter);
+
+// Cancel the subscription
+relay.unsubscribe(subscriptionId);
+
+// Disconnect from the relay
+relay.disconnect();
+```
 
 ## Links
 
