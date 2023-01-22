@@ -1,4 +1,3 @@
-import 'package:nostr_client/nostr_client.dart';
 import 'package:nostr_client/src/key_pair/codec/public_key_codec.dart';
 import 'package:test/test.dart';
 
