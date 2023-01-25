@@ -1,5 +1,6 @@
 library nostr_client;
 
+export 'package:nostr_client/src/encrypted_direct_message/encrypted_direct_message.dart';
 export 'package:nostr_client/src/event.dart';
 export 'package:nostr_client/src/event_kind.dart';
 export 'package:nostr_client/src/filter.dart';
