@@ -8,7 +8,7 @@ A nostr client for dart and flutter.
 - [ ] [NIP-02: Contact List and Petnames][nip02]
 - [ ] [NIP-03: OpenTimestamps Attestations for Events][nip03]
 - [ ] [NIP-04: Encrypted Direct Message][nip04]
-- [ ] [NIP-05: Mapping Nostr keys to DNS-based internet identifiers][nip05]
+- [x] [NIP-05: Mapping Nostr keys to DNS-based internet identifiers][nip05]
 - [ ] [NIP-06: Basic key derivation from mnemonic seed phrase][nip06]
 - [ ] [NIP-07: window.nostr capability for web browsers][nip07]
 - [ ] [NIP-08: Handling Mentions][nip08]
