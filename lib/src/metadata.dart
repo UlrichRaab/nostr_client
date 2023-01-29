@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:collection/collection.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
-import 'package:nostr_client/src/nip05.dart';
 
 part 'metadata.g.dart';
 
@@ -43,7 +42,7 @@ class Metadata {
   final String? picture;
 
   /// The internet identifier of the user.
-  final Nip05? nip05;
+  final String? nip05;
 
   /// Converts this user metadata to json.
   Map<String, dynamic> toJson() {

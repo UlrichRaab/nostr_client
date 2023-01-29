@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:nostr_client/nostr_client.dart';
-import 'package:nostr_client/src/nip05service.dart';
 
 void main() async {
   // Create a new relay instance and connect to the relay

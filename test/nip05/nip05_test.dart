@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:nostr_client/src/nip05.dart';
-import 'package:nostr_client/src/nip05service.dart';
+import 'package:nostr_client/src/nip05_service.dart';
 import 'package:test/test.dart';
 
 import '../utils.dart';
