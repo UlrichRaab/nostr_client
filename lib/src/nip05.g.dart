@@ -7,10 +7,10 @@ part of 'nip05.dart';
 // **************************************************************************
 
 Nip05 _$Nip05FromJson(Map<String, dynamic> json) => Nip05(
-      json['verified'] as bool? ?? false,
-      json['name'] as String? ?? '',
-      json['domain'] as String? ?? '',
-      json['verified_at'] == null
+      verified: json['verified'] as bool? ?? false,
+      name: json['name'] as String? ?? '',
+      domain: json['domain'] as String? ?? '',
+      verifiedAt: json['verified_at'] == null
           ? null
           : DateTime.parse(json['verified_at'] as String),
     );

@@ -1,7 +1,7 @@
-import 'dart:io';
-
 import 'package:nostr_client/nostr_client.dart';
 import 'package:test/test.dart';
+
+import '../utils.dart';
 
 void main() {
   final verifier = Verifier();
@@ -9,7 +9,7 @@ void main() {
   test(
     'event_0',
     () async {
-      final event = await _readEvent('event_0');
+      final event = await readEvent('event_0');
       final isValid = verifier.verify(
         publicKey: event.pubkey,
         message: event.id,
@@ -22,7 +22,7 @@ void main() {
   test(
     'event_1',
     () async {
-      final event = await _readEvent('event_1');
+      final event = await readEvent('event_1');
       final isValid = verifier.verify(
         publicKey: event.pubkey,
         message: event.id,
@@ -35,7 +35,7 @@ void main() {
   test(
     'event_2',
     () async {
-      final event = await _readEvent('event_2');
+      final event = await readEvent('event_2');
       final isValid = verifier.verify(
         publicKey: event.pubkey,
         message: event.id,
@@ -44,10 +44,4 @@ void main() {
       assert(isValid);
     },
   );
-}
-
-Future<Event> _readEvent(String fileName) async {
-  final file = File('test_data/events/$fileName.json');
-  final jsonString = await file.readAsString();
-  return Event.fromJsonString(jsonString);
 }

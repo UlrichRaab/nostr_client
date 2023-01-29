@@ -1,16 +1,25 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
 import 'package:nostr_client/nostr_client.dart';
+import 'package:nostr_client/src/nip05service.dart';
 
 void main() async {
   // Create a new relay instance and connect to the relay
   final relay = Relay('wss://relay.nostr.info');
   relay.connect();
 
+  final nip05Service = NIP05Service(http.Client());
+
   // Print events sent by the relay
   relay.stream.whereIsEvent().listen(((event) async {
     if (event.kind == EventKind.metadata) {
-      final m = await Metadata.withCheckedNip05(event);
-      print(m);
-      return;
+      final data = jsonDecode(event.content);
+      if (!data.containsKey('nip05')) return;
+      final m = await nip05Service.get(event.pubkey, data['nip05']);
+
+      return print(m);
     }
 
     print(event);
