@@ -1,0 +1,9 @@
+{
+    "id": "add3b4bec824739f3c4b5ff96c20c59b4b1b743f2efbf3abaabd60320ff648ff",
+    "pubkey": "82341f882b6eabcd2ba7f1ef90aad961cf074af15b9ef44a09f9d2a8fbfbe6a2",
+    "created_at": 1673558917,
+    "kind": 0,
+    "tags": [],
+    "content": "{\"lud06\":\"LNURL1DP68GURN8GHJ7AMPD3KX2AR0VEEKZAR0WD5XJTNRDAKJ7TNHV4KXCTTTDEHHWM30D3H82UNVWQHHXMMPDD5KUEMNV9MX2V3HS6Y505\",\"website\":\"\",\"nip05\":\"jack@cash.app\",\"picture\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/1115644092329758721\\/AFjOr-K8_400x400.jpg\",\"display_name\":\"jack\",\"about\":\"#bitcoin\",\"name\":\"jack\"}",
+    "sig": "17839b38b7f3b14531a5b1a8dc1c34de9b3db556dbdf3543a3305a328a8e2e881f37b85c80fd9f67cec256dc10e7e1b0002d7893c3b6a19d19856187b05ef499"
+}
